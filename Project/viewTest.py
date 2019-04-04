@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from Project.data import *
+from data import *
 
 class viewTest(Frame):
 
@@ -45,11 +45,12 @@ class viewTest(Frame):
         Tests(testNumber=testNumber, testName=testName, testContent=testContent, testType=testType, deadline=deadline).currentTest()
         if testType == 1:
             self.master.switch_frame('viewTestSummativeLecturer')
+        else:
+            self.master.switch_frame('viewTestFormativeLecturer')
+        
 
     def back(self):
         self.master.switch_frame('Lecturer')
-
-
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''

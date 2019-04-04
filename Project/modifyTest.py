@@ -1,5 +1,5 @@
 from tkinter import *
-from Project.data import *
+from data import *
 
 class modifyTest(Frame):
 
