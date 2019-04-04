@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from data import *
 
-class viewTestSummativeLecturer(Frame):
+class viewTestFormativeLecturer(Frame):
 
     def __init__(self, master):
         Frame.__init__(self,master)
@@ -20,11 +20,10 @@ class viewTestSummativeLecturer(Frame):
         self.frameInCanvas.bind("<Configure>", self.onFrameConfigure)
 
         self.main()
-                    #enable the window
+                                                                
     def main(self):
         currentTest = Tests().getCurrentTest()
-        a,b,c,d,e=currentTest #get the current test and all related info
-        usernames, passwords, usertypes = Users().openData() #get the user data
+        usernames, passwords, usertypes = Users().openData()
 
         userCounter = 0
         studentList = []
@@ -32,26 +31,29 @@ class viewTestSummativeLecturer(Frame):
             if user == 's':
                 studentList.append(usernames[userCounter])
                 userCounter += 1
-                                    #   gets the list of all the student users to get their test results
+
         self.buttonList = []
         rowCounter=10
-        studentCoutner=0
+        studentCounter=0
         self.takenTestList = []
-
+        print("got here VTFL.main()")
         for student in studentList:
             try:
                 testTrials = Test_record(user=student, testNumber=currentTest[0]).getTrials()
                 self.takenTestList.append(student)
                 Label(self.frameInCanvas, text=student).grid(row=rowCounter, column=0, padx=5, pady=5)
-                self.buttonList.append(Button(self.frameInCanvas, text="View test", command=lambda: self.viewTest(student)))
-                self.buttonList[studentCoutner].grid(row=rowCounter, column=1, padx=5, pady=5)
+                print("does it fuck up here?")
+                self.buttonList.append(Button(self.frameInCanvas, text='View test', command=lambda: self.viewTest(1)))
+                print(rowCounter,"\n"+str(studentCounter),"\n"+student,"\n",self.buttonList,"variable: check 3")
+                self.buttonList[studentCounter].grid(row=rowCounter, column=1, padx=5, pady=5)
                 rowCounter+=1
-                studentCoutner += 1
+                studentCounter += 1
             except:
-                pass        # if the student has taken the test, they are added to takenTestList
+                pass
 
         all_student_scores = []
-        for student in self.takenTestList: # for each student, get their test record and add it to total list
+        print(self.takenTestList)
+        for student in self.takenTestList:
             user = student
             Student_test_record = Test_record(user=user, testNumber=Tests().getCurrentTest()[0]).getTestScore()
             all_student_scores.append(Student_test_record)
@@ -65,9 +67,10 @@ class viewTestSummativeLecturer(Frame):
 
         Button(self.frameInCanvas, text='Back', command=self.back).grid(row=rowCounter, column=0, padx=5, pady=5)
 
-    def viewTest(self, student):
-        Users(username=student).viewUser()
-        self.master.switch_frame('viewIndividualTestSummativeLecturer')
+    def viewTest(self, number):
+        print("viewing test result for "+self.takenTestList[number]+" aka "+str(number))
+        Users(username=self.takenTestList[number]).viewUser()
+        self.master.switch_frame('viewIndividualTestFormativeLecturer')
 
     def back(self):
         Tests().currentTest()

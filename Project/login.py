@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from Project.data import *
+from data import *
 
 class login(Frame):
 
@@ -10,11 +10,6 @@ class login(Frame):
         """
         Frame.__init__(self,master)
 
-        """
-            Code To add Scrollbar to window derived from Steven Bryan Oakley at
-            https://stackoverflow.com/questions/3085696/adding-a-scrollbar-to-a-group-of-widgets-in-tkinter
-            Object-oriented solution
-        """
         self.canvas = Canvas(self, borderwidth=0)
         self.frameInCanvas = Frame(self.canvas)
         self.verticalScrollBar = Scrollbar(self, orient="vertical", command=self.canvas.yview)
@@ -34,7 +29,9 @@ class login(Frame):
             Tkinter widgets to be put in the frame in the canvas.
         """
         self.var_username = StringVar()
+        self.var_username.set('student')
         self.var_password = StringVar()
+        self.var_password.set('password')
 
         label_username = Label(self.frameInCanvas, text='Username: ')
         label_password = Label(self.frameInCanvas, text='Password: ')

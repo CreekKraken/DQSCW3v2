@@ -1,19 +1,22 @@
 from tkinter import *
-from Project.data import *
+from data import *
 """ Import all frames in the application here """
-from Project.student import student
-from Project.login import login
-from Project.takeTest import takeTest
-from Project.summativeTestFeedback import summativeTestFeedback
-from Project.viewAnswerStudent import viewAnswerStudent
-from Project.lecturer import lecturer
-from Project.createTest import createTest
-from Project.formativeTestFeedback import formativeTestFeedback
-from Project.Modify import Modify
-from Project.modifyTest import modifyTest
-from Project.viewTest import viewTest
-from Project.viewTestSummativeLecturer import viewTestSummativeLecturer
-from Project.viewIndividualTestSummativeLecturer import viewIndividualTestSummativeLecturer
+from student import student
+from login import login
+from takeTest import takeTest
+from summativeTestFeedback import summativeTestFeedback
+from viewAnswerStudent import viewAnswerStudent
+from lecturer import lecturer
+from createTest import createTest
+from formativeTestFeedback import formativeTestFeedback
+from Modify import Modify
+from modifyTest import modifyTest
+from viewTest import viewTest
+from viewTestSummativeLecturer import viewTestSummativeLecturer
+from viewIndividualTestSummativeLecturer import viewIndividualTestSummativeLecturer
+from statsGen import statsView,Result
+from viewTestFormativeLecturer import viewTestFormativeLecturer
+from viewIndividualTestFormativeLecturer import viewIndividualTestFormativeLecturer
 
 class App(Tk):
     def __init__(self):
@@ -22,15 +25,6 @@ class App(Tk):
         """
         Tk.__init__(self)
 
-        """
-            Code To change frames derived from Steven M. Vascellaro at
-            https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter
-            Multi-frame tkinter application v2.3
-        """
-        """
-            Scrollbar code at the start of each frame class is derived from Steven Bryan Oakley
-            Details on login.py
-        """
         self.current_frame = None
         self.pages = {'Login': login,
                  'Student': student,
@@ -44,7 +38,10 @@ class App(Tk):
                  'modifyTest': modifyTest,
                  'viewTest': viewTest,
                  'viewTestSummativeLecturer': viewTestSummativeLecturer,
-                 'viewIndividualTestSummativeLecturer': viewIndividualTestSummativeLecturer
+                 'viewIndividualTestSummativeLecturer': viewIndividualTestSummativeLecturer,
+                 'viewStats': statsView,
+                 'viewTestFormativeLecturer': viewTestFormativeLecturer,
+                 'viewIndividualTestFormativeLecturer': viewIndividualTestFormativeLecturer
                  }
 
         self.switch_frame('Login')
@@ -55,6 +52,7 @@ class App(Tk):
         """
         if self.current_frame is not None:
             self.current_frame.destroy()
+        print(str(frame_name))
 
         new_frame = self.pages[frame_name](self)
         self.current_frame = new_frame
@@ -63,9 +61,11 @@ class App(Tk):
 
 
 
-app = App()
-app.title('Application')
-app.state('zoomed')
-app.mainloop()
+def main():
+    app = App()
+    app.title('Application')
+    app.state('zoomed')
+    app.mainloop()
 
-
+if __name__ == '__main__':
+    main()

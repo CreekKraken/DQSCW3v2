@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from data import *
 
-class viewIndividualTestSummativeLecturer(Frame):
+class viewIndividualTestFormativeLecturer(Frame):
 
     def __init__(self, master):
         Frame.__init__(self,master)
@@ -32,7 +32,7 @@ class viewIndividualTestSummativeLecturer(Frame):
         correctAnswers = testRetrieve[4]
         totalQuestions = testRetrieve[5]
         var_correctAnswers = StringVar()
-        var_correctAnswers.set(user + "scored: " + str(correctAnswers) + '/' + str(totalQuestions))
+        var_correctAnswers.set(user + " scored: " + str(correctAnswers) + '/' + str(totalQuestions))
         Label(self.frameInCanvas, textvariable=var_correctAnswers).grid(row=0, column=0, padx=5, pady=5, sticky='W')
 
         #Obtain test information
@@ -77,7 +77,7 @@ class viewIndividualTestSummativeLecturer(Frame):
 
     def back(self):
         Users().viewUser()
-        self.master.switch_frame('viewTestSummativeLecturer')
+        self.master.switch_frame('viewTestFormativeLecturer')
 
 
     def onFrameConfigure(self, event):
